@@ -100,3 +100,12 @@ def get_transactions(access_token):
     except plaid.ApiException as e:
         return e
 
+def get_balance(access_token):
+    try:
+        request = AccountsBalanceGetRequest(
+            access_token=access_token
+        )
+        response = client.accounts_balance_get(request)
+        return response
+    except plaid.ApiException as e:
+        return e

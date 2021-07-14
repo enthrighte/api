@@ -1,5 +1,5 @@
 import azure.functions as func
-from .. helpers.plaidconnector import get_transactions
+from .. helpers.plaidconnector import get_balance
 
 
 def main(req: func.HttpRequest, qmsg: func.Out[func.QueueMessage], emsg: func.Out[str]) -> str:
@@ -17,7 +17,7 @@ def main(req: func.HttpRequest, qmsg: func.Out[func.QueueMessage], emsg: func.Ou
     if access_token:
         qmsg.set(access_token)
         emsg.set(access_token)
-        plaid_response = get_transactions(access_token)
+        plaid_response = get_balance(access_token)
         return func.HttpResponse(f"{plaid_response}")
     else:
         return func.HttpResponse(

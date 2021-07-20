@@ -23,6 +23,7 @@ from plaid.model.identity_get_request import IdentityGetRequest
 from plaid.model.investments_transactions_get_request_options import InvestmentsTransactionsGetRequestOptions
 from plaid.model.investments_transactions_get_request import InvestmentsTransactionsGetRequest
 from plaid.model.accounts_balance_get_request import AccountsBalanceGetRequest
+from plaid.model.liabilities_get_request import LiabilitiesGetRequest
 from plaid.model.accounts_get_request import AccountsGetRequest
 from plaid.model.investments_holdings_get_request import InvestmentsHoldingsGetRequest
 from plaid.model.item_get_request import ItemGetRequest
@@ -106,6 +107,16 @@ def get_balance(access_token):
             access_token=access_token
         )
         response = client.accounts_balance_get(request)
+        return response
+    except plaid.ApiException as e:
+        return e
+
+def get_liabilities(access_token):
+    try:
+        request = LiabilitiesGetRequest(
+            access_token=access_token
+        )
+        response = client.liabilities_get(request)
         return response
     except plaid.ApiException as e:
         return e
